@@ -4,9 +4,11 @@ using FriendOrganizer.UI.Data;
 
 namespace FriendOrganizer.UI.ViewModel
 {
-    public class MainViewModel
+    public class MainViewModel : ViewModelBase
     {
         private IFriendDataService _friendDataService;
+
+        private Friend _selectedFriend;
 
         public MainViewModel(IFriendDataService friendDataService)
         {
@@ -17,10 +19,22 @@ namespace FriendOrganizer.UI.ViewModel
         public void Load()
         {
             var friends = _friendDataService.GetAll();
-
-
+            foreach (var friend in friends)
+            {
+                Friends.Add(friend);
+            }
         }
 
         public ObservableCollection<Friend> Friends { get; set; }
+
+        public Friend SelectedFriend
+        {
+            get => _selectedFriend;
+            set
+            {
+                _selectedFriend = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

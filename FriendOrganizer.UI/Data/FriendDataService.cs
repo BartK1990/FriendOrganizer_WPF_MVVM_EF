@@ -1,16 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using FriendOrganizer.DataAccess;
 using FriendOrganizer.Model;
 
 namespace FriendOrganizer.UI.Data
 {
     public class FriendDataService : IFriendDataService
     {
+        private Func<FriendOrganizerDbContext> _contextCreator;
+
+        public FriendDataService(Func<FriendOrganizerDbContext> contextCreator)
+        {
+            _contextCreator = contextCreator;
+        }
+
         public IEnumerable<Friend> GetAll()
         {
-            // todo Add access to real Database
-            yield return new Friend() {FirstName = "John", LastName = "Doe"};
-            yield return new Friend() {FirstName = "Bart", LastName = "Kuriata"};
-            yield return new Friend() {FirstName = "Simon", LastName = "Garfunkel"};
+            using (var ctx = _contextCreator())
+            {
+                return ctx.Friends.AsNoTracking().ToList();
+            }
 
         }
     }

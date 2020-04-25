@@ -17,14 +17,6 @@ namespace FriendOrganizer.UI.Data
             _contextCreator = contextCreator;
         }
 
-        public IEnumerable<Friend> GetAll()
-        {
-            using (var ctx = _contextCreator())
-            {
-                return ctx.Friends.AsNoTracking().ToList();
-            }
-        }
-
         public async Task<List<Friend>> GetAllAsync()
         {
             using (var ctx = _contextCreator())

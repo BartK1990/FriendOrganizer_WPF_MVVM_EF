@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using FriendOrganizer.Model;
 using FriendOrganizer.UI.Data;
@@ -30,11 +26,16 @@ namespace FriendOrganizer.UI.ViewModel
         private async void OnSaveExecute()
         {
             await _dataService.SaveAsync(Friend);
+            _eventAggregator.GetEvent<AfterFriendSavedEvent>().Publish(
+                new AfterFriendSavedEventArgs()
+                {
+                    Id = Friend.Id,
+                    DisplayMember = $"{Friend.FirstName} {Friend.LastName}"
+                });
         }
 
         private bool OnSaveCanExecute()
         {
-            // todo Check if friend is valid
             return true;
         }
 

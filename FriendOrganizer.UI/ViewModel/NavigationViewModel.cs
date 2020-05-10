@@ -32,26 +32,10 @@ namespace FriendOrganizer.UI.ViewModel
             var lookup = await _friendLookupService.GetFriendLookupAsync();
             foreach (var item in lookup)
             {
-                Friends.Add(new NavigationItemViewModel(item.DisplayMember, item.Id));
+                Friends.Add(new NavigationItemViewModel(item.DisplayMember, item.Id, _eventAggregator));
             }
         }
 
         public ObservableCollection<NavigationItemViewModel> Friends { get; }
-
-        private NavigationItemViewModel _selectedFriend;
-        public NavigationItemViewModel SelectedFriend
-        {
-            get => _selectedFriend;
-            set
-            {
-                _selectedFriend = value;
-                OnPropertyChanged();
-                if (_selectedFriend != null)
-                {
-                    _eventAggregator.GetEvent<OpenFriendDetailViewEvent>()
-                        .Publish(_selectedFriend.Id);
-                }
-            }
-        }
     }
 }

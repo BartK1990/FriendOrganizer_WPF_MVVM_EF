@@ -28,6 +28,12 @@ namespace FriendOrganizer.DataAccess.Migrations
                 new ProgrammingLanguage() { Name = "TypeScript" },
                 new ProgrammingLanguage() { Name = "F#" },
                 new ProgrammingLanguage() { Name = "Swift" });
+
+            context.SaveChanges();
+
+            context.FriendPhoneNumbers.AddOrUpdate(
+                pn => pn.Number,
+                new FriendPhoneNumber() { Number = "+48 12345678", FriendId = context.Friends.First().Id });
         }
     }
 }

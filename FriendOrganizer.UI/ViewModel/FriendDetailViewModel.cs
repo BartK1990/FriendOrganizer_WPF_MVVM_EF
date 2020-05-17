@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FriendOrganizer.Model;
@@ -194,7 +195,10 @@ namespace FriendOrganizer.UI.ViewModel
 
         private bool OnSaveCanExecute()
         {
-            return Friend != null && !Friend.HasErrors && HasChanges;
+            return Friend != null 
+                   && !Friend.HasErrors 
+                   && PhoneNumbers.All(pn => !pn.HasErrors)
+                   && HasChanges;
         }
         
         private void OnAddPhoneNumberExecute()

@@ -85,7 +85,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Data\Lookups\IFriendLookupDataService.cs" />
-    <Compile Include="Data\Lookups\FriendLookupDataService.cs" />
+    <Compile Include="Data\Lookups\IProgrammingLanguageLookupDataService.cs" />
+    <Compile Include="Data\Lookups\LookupDataService.cs" />
     <Compile Include="Event\AfterFriendSavedEvent.cs" />
     <Compile Include="Event\AfterFriendDeletedEvent.cs" />
     <Compile Include="Event\OpenFriendDetailViewEvent.cs" />

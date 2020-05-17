@@ -26,7 +26,7 @@ namespace FriendOrganizer.UI.Startup
             builder.RegisterType<NavigationViewModel>().As<INavigationViewModel>();
             builder.RegisterType<FriendDetailViewModel>().As<IFriendDetailViewModel>();
 
-            builder.RegisterType<FriendLookupDataService>().AsImplementedInterfaces();
+            builder.RegisterType<LookupDataService>().AsImplementedInterfaces();
             builder.RegisterType<FriendRepository>().As<IFriendRepository>();
 
             return builder.Build();

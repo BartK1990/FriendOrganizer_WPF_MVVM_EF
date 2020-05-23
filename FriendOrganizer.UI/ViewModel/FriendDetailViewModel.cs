@@ -203,14 +203,21 @@ namespace FriendOrganizer.UI.ViewModel
         
         private void OnAddPhoneNumberExecute()
         {
-            // TODO: Implement this
-            throw new System.NotImplementedException();
+            var newNumber = new FriendPhoneNumberWrapper(new FriendPhoneNumber());
+            newNumber.PropertyChanged += FriendPhoneNumberWrapper_PropertyChanged;
+            PhoneNumbers.Add(newNumber);
+            Friend.Model.PhoneNumbers.Add(newNumber.Model);
+            newNumber.Number = ""; // Trigger validation
         }
 
         private void OnRemovePhoneNumberExecute()
         {
-            // TODO: Implement this
-            throw new System.NotImplementedException();
+            SelectedPhoneNumber.PropertyChanged -= FriendPhoneNumberWrapper_PropertyChanged;
+            _friendRepository.RemovePhoneNumber(SelectedPhoneNumber.Model);
+            PhoneNumbers.Remove(SelectedPhoneNumber);
+            SelectedPhoneNumber = null;
+            HasChanges = _friendRepository.HasChanges();
+            ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
         }
 
         private bool OnRemovePhoneNumberCanExecute()

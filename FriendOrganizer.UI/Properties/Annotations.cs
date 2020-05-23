@@ -147,7 +147,7 @@ namespace FriendOrganizer.UI.Annotations
   ///     public const string STRING_CONST = "1";
   ///   }
   ///
-  ///   public class AfterFriendDeletedEvent
+  ///   public class AfterDetailDeletedEvent
   ///   {
   ///     [ValueProvider("TestNamespace.Constants")] public int myField;
   ///     public void Foo([ValueProvider("TestNamespace.Constants")] string str) { }

@@ -94,6 +94,11 @@ namespace FriendOrganizer.UI.ViewModel
                 }
             };
             ((DelegateCommand)SaveCommand).RaiseCanExecuteChanged();
+            if (Meeting.Id == 0)
+            {
+                // Little trick to trigger the validation
+                Meeting.Title = "";
+            }
         }
     }
 }
